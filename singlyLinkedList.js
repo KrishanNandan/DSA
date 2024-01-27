@@ -46,6 +46,50 @@ class singlyLinkList {
     this.length--;
     return current;
   }
+
+  shift() {
+    if (!this.head) return undefined;
+    let temp = this.head;
+    this.head = temp.next;
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+    return this;
+  }
+
+  unshift(val) {
+    let temp = new Node(val);
+    if (!this.head) {
+      this.head = temp;
+      this.tail = this.head;
+    }
+    temp.next = this.head;
+    this.head = temp;
+    this.length++;
+    return this;
+  }
+
+  get(val) {
+    let index = 0;
+    let currentValue = this.head;
+    while (index <= val) {
+      if (index === val) {
+        return currentValue;
+      }
+      currentValue = currentValue.next;
+      index++;
+    }
+  }
+
+  set(index, val) {
+    let foundNode = get(index);
+    if (foundNode) {
+      foundNode.value = val;
+      return true;
+    }
+    return false;
+  }
 }
 const list = new singlyLinkList();
 list.push(10);
