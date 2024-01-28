@@ -83,16 +83,67 @@ class singlyLinkList {
   }
 
   set(index, val) {
-    let foundNode = get(index);
+    let foundNode = this.get(index);
     if (foundNode) {
-      foundNode.value = val;
+      foundNode.val = val;
       return true;
     }
     return false;
+  }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) {
+      this.push(val);
+      return true;
+    }
+    if (index === 0) {
+      this.unshift(val);
+      return true;
+    }
+    let foundNode = this.get(index - 1);
+    if (foundNode) {
+      let newValue = new Node(val);
+      newValue.next = { ...foundNode.next };
+      foundNode.next = { ...newValue };
+      this.length++;
+      return true;
+    }
+  }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return false;
+    if (index === this.length - 1) {
+      this.pop();
+      return true;
+    }
+    if (index === 0) {
+      this.shift();
+      return true;
+    }
+    let foundNode = this.get(index);
+    let temp = { ...foundNode.next };
+    if (foundNode) {
+      foundNode.val = temp.val;
+      foundNode.next = temp.next;
+      this.length--;
+      return true;
+    }
+  }
+
+  reverse() {
+    let reversedList = new singlyLinkList();
+    for (let i = this.length - 1; i >= 0; i--) {
+      const { val } = this.get(i);
+      reversedList.push(val);
+    }
+    this.head = reversedList.head;
+    this.tail = reversedList.tail;
+    this.length = reversedList.length;
+    return this;
   }
 }
 const list = new singlyLinkList();
 list.push(10);
 list.push(20);
 list.push(30);
-console.log("krishan", list.pop());
