@@ -28,17 +28,17 @@ class DoublyLinkedList {
   }
 
   pop() {
-    if (this.length === 0) return undefined;
+    if (!this.head) return undefined;
+    const lastValue = this.tail;
     if (this.length === 1) {
-      const lastValue = { ...this.head };
       this.head = null;
       this.tail = null;
-      return lastValue;
+    } else {
+      this.tail = lastValue.prev;
+      this.tail.next = null;
+      lastValue.prev = null;
     }
-    const prevValue = { ...this.tail.prev };
-    const lastValue = { ...this.tail };
-    this.tail = prevValue;
-    this.tail.next = null;
-    return prevValue;
+    this.length--;
+    return lastValue;
   }
 }
