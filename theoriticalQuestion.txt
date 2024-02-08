@@ -1,0 +1,6 @@
+state vs props
+advantage of using react
+is array mutable in javascript and typescript
+what is closure
+difference between arrow and normal function
+advantage of using NextJs over ReactJs

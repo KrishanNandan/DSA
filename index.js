@@ -1,13 +1,5 @@
-const longestSubString = (str, subStr) => {
-  let end = subStr.length;
-  let count = 0;
-  for (let i = 0; i < str.length; i++) {
-    let word = str.substring(i, i + end);
-    if (word === subStr) {
-      count++;
-    }
-  }
-  return count;
-};
+function capitalizeFirstLetterOfWord(str) {
+  return str.charAt(0).toUpperCase() + str.substring(1);
+}
 
-console.log(longestSubString('lorie lo lole','lo'));
+console.log(capitalizeFirstLetterOfWord("asasashsashahshahs"));
