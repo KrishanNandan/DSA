@@ -1,4 +1,3 @@
 https://www.w3resource.com/javascript-exercises/
 https://www.woventeams.com/post/javascript-coding-interview-questions-resources-and-challenges/
-https://www.keka.com/javascript-coding-interview-questions-and-answers (good ones!!!)
-https://edabit.com/challenges/javascript
+https://edabit.com/challenges/javascript--current
