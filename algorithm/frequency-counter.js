@@ -15,3 +15,14 @@ console.log(
 );
 
 /**Note: When we put numbers as key in object then it gets sorted by default in ascending order**/
+
+
+function  sortByFrequency (str) {
+  let frequencyChars = {};
+  str.split("").forEach((val)=>{
+    frequencyChars[val]= frequencyChars[val] ? frequencyChars[val] + 1 : 1;
+  });
+  console.log(frequencyChars);
+}
+
+console.log(sortByFrequency("tree"));
