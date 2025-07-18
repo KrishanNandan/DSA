@@ -49,6 +49,7 @@
 
 
 
+
 //Problem: Given a string, reverse it in place.
 // function reverseString(str) {
 //   let newStr = "";
@@ -60,6 +61,7 @@
 
 // reverseString("hello"); // Expected: "olleh"
 // reverseString("JavaScript"); // Expected: "tpircSavaJ"
+
 
 
 
@@ -77,6 +79,9 @@
 // averagePair([1, 2, 3], 2.5);
 
 
+
+
+
 //Subsequence Check: Implement a function isSubsequence(str1, str2) that takes two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. The order matters, but the characters don't need to be contiguous.
 // function isSubsequence(subStr, str) {
 //     const lengthSub = subStr.length;
@@ -86,6 +91,10 @@
 //     return false;
 // }
 // console.log(isSubsequence("hello", "world hello")); will return true
+
+
+
+
 
 //Find Missing Words: Given two strings, where the first string is a superset of the second string (meaning the second string's words are a subsequence of the first string's words, space-delimited), return an array containing the words missing from the second string.
 // function missingWords(superset, word) {
