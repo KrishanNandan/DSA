@@ -85,6 +85,48 @@
 //     }
 //     return false;
 // }
-// console.log(isSubsequence("hello", "world hello"));
+// console.log(isSubsequence("hello", "world hello")); will return true
+
+//Find Missing Words: Given two strings, where the first string is a superset of the second string (meaning the second string's words are a subsequence of the first string's words, space-delimited), return an array containing the words missing from the second string.
+// function missingWords(superset, word) {
+//   const supersetArray = superset.split(" ");
+//   return supersetArray.filter(val=>val!==word);
+// }
+//         OR
+// (not a good solution)
+// function missingWords(superset, word) {
+//     const supersetArray = superset.split(" ");
+//     let left = 0;
+//     let right = supersetArray.length-1;
+//     let result = [];
+//     while(left!==right){
+//         if(supersetArray[left]!==word){
+//             result.push(supersetArray[left]);
+//         }
+        
+//         if(supersetArray[right]!==word){
+//             result.push(supersetArray[right]);
+//         }
+//         left ++ ;
+//         if (left !== right) right -- ;
+//     }
+//     return result;
+// }
+//        OR 
+// (Clean code)           
+// function missingWords(superset, word) {
+//     const supersetArray = superset.split(" ");
+//     let result = [];
+
+//     for (let i = 0; i < supersetArray.length; i++) {
+//         if (supersetArray[i] !== word) {
+//             result.push(supersetArray[i]);
+//         }
+//     }
+
+//     return result;
+// }  
+// missingWords("I like cheese", "like") should return ["I", "cheese"].
+
 
 
