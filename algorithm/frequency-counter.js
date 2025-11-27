@@ -17,8 +17,8 @@ console.log(
 /**Note: When we put numbers as key in object then it gets sorted by default in ascending order**/
 
 
-/** Sort letters of string in descending order by number of times they occur also if occurence is same then give precendencee to their
- * occurence in alphabet e.g "eleven" will return "eeelnv"
+/** Sort letters of string in descending order by number of times they occur also if occurence is same then give precendencee 
+ * to their occurence in alphabet e.g "eleven" will return "eeelnv"
  */
 function sortByFrequency(str) {
     let frequencyChars = {};
