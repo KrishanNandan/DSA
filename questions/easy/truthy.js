@@ -12,3 +12,11 @@ function truthyVal(arr) {
 }
 
 truthyVal([true, false, false, true, false]);
+
+//alternate
+
+function truthyVal(arr) {
+  return arr.filter(val=>Boolean(val)).length
+}
+
+console.log(truthyVal([true, false, false, true, false]));

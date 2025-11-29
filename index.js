@@ -11,3 +11,16 @@ function memoize(fn) {
         }
     }
 }
+
+const compose = function (functions) {
+  return function (x) {
+    if (!functions.length) return x;
+    functions.reverse().forEach((i) => {
+      x = i(x);
+    });
+    return x;
+  };
+};
+
+const fn = compose([x => x + 1, x => x * x, x => 2 * x]);
+console.log(fn(4));
