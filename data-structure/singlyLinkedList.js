@@ -14,18 +14,15 @@ class singlyLinkList {
 
   push(val) {
     const newNode = new Node(val);
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = this.head;
-    } else {
-      /**Since tail has been equated to head so when we are doing tail.next it is like head.next since object */
-      /**so during 1st operation tail will have value of head but as we progress things start to get stored
-       * in head.next then head.next.next and so on and tell use to have last value and next value as null
-       */
-      this.tail.next = newNode;
-      this.tail = newNode;
+    if (this.head) {
+      this.tail.next = newNode; /**Here we are linking the new node to the list */
+      this.tail = newNode; /**Here Updating the 'tail' pointer itself */
     }
-    this.length = this.length + 1;
+    else {
+      this.head = newNode;
+      this.tail = this.head; /** It can be equal to newNode as well and that won't make a difference*/
+    }
+    this.length++;
     return this;
   }
 
