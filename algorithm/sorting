@@ -1,0 +1,19 @@
+const unsortedArray = [7, 2, 5, 9, 1, 6]
+
+function BubbleSort(arr) {
+    let swapped;/**This for exiting if already sorted */
+    for (let i = 0; i < arr.length; i++) {
+        swapped = false;
+        for (let j = 0; j < arr.length - i - 1; j++) { /** -1 since when i is 0 at that run also 1 element got at end and (
+            -1-i because everytime by default last element is biggest ) */
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+    }
+    return arr;
+}
+
+console.log(BubbleSort(unsortedArray));

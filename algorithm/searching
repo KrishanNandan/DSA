@@ -1,0 +1,15 @@
+let arr = [1, 2, 3, 4, 5, 6]
+function binarySearch(sortedArray, value) {
+    let left = 0
+    let right = sortedArray.length - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (sortedArray[mid] === value) return mid;
+        if (sortedArray[mid] > value) {
+            right = mid - 1;
+        } else if (sortedArray[mid] < value) {
+            left = mid + 1
+        }
+    }
+}
+console.log(arr(k, 6));
