@@ -1,0 +1,18 @@
+function getAddition(increment) {
+  let current = 1; // Initial starting value
+
+  return {
+    get: function() {
+      const result = current;
+      current += increment; // Increment the value for the next call
+      return result;
+    }
+  };
+}
+
+// Usage:
+let add = getAddition(10);
+console.log(add.get()); // 1
+console.log(add.get()); // 11
+console.log(add.get()); // 21
+console.log(add.get()); // 31

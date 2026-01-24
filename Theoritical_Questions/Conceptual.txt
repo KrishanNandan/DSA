@@ -1,0 +1,109 @@
+--> state vs props
+The state represents parts of an Application that can change. Each component can have its State.
+The state is Mutable and It is local to the component only.
+Props are known as properties it can be used to pass data from one component to another. 
+Props cannot be modified, read-only, and Immutable
+
+--> advantage of using react
+Speed
+Flexibility to use for different devices
+Corss-Platform library
+Maintainablity
+
+
+-->is array mutable in javascript and typescript
+array is mutable in javascript but not in typescript
+
+-->difference between arrow and normal function
+ No arguments object in arrow functions
+ Arrow functions do not create their own this binding
+ Arrow functions cannot be used as constructors
+ Arrow functions cannot be declared
+ Arrow functions cannot be accessed before initialization
+
+
+-->advantage of using NextJs over ReactJs
+The major difference between Next JS and React JS is performance because of 
+1. the static destinations , server-side rendering, Image optimization,code-splitting etc
+2. Waterfalling in react
+3. Better SEO
+4. React won't work where javascript does't work like emails eg. from make my trip 
+
+
+
+-->What is a closure?
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).
+
+
+
+--> disadvantages of closure
+Memory Consumption and Leaks: Closures prevent the JavaScript engine's garbage collector from reclaiming memory because the inner function maintains a live reference to its outer lexical scope. 
+If closures capture large objects and are not properly released (e.g., by setting the closure reference to null), it can lead to memory leaks. even primitive data in the closure are moved to heap
+hence even when your function is out of call stack memory in heap will be preserved untill inner returned function is not set to null which will break the reference.
+
+Performance Overhead: Creating functions within functions repeatedly can be memory-inefficient and slow down execution, especially in performance-critical sections or inside loops. 
+Each instantiation of a closure requires its own memory allocation for the captured variables. so multiple calls can lead to stack overflow.
+
+Increased Complexity and Debugging Difficulty: Tracing the value of variables through nested scopes can be difficult. 
+Since variables in a closure can be modified by the inner function(if there are 2 returned function which is using same variable), 
+it can lead to unintended side effects or shared state issues if multiple closures reference the same variable. Also closure variable is have higher precedence than global variable.
+
+Unintentional Variable Capture: Closures capture variables by reference, not by value. This often led to bugs in loops before the introduction of let, 
+where every closure created in a loop would point to the final value of the loop variable.
+
+Global Variable Issues: If not careful, variables intended to be local to the closure might accidentally become global or persist longer than necessary, cluttering the memory space. 
+
+--> ES6 Feature
+1. let and const 
+2. Arrow function
+3. Template literals
+4. Destructuring assignment
+5. Classes
+6. Modules(import/export)
+7. Promises
+8. spread and rest operator
+9. default parameters
+10. set and map 
+11. enhanced object literals(Simplified object creation with shorthand property names, method definitions, and computed property keys.) 
+12. for of loops
+
+--> Why methods are not copied during deep clone
+1. Serialization problem (The act of translating a data structure into a portable format (e.g., a JSON string)): Most deepclone technique
+   are based on serialization(JSON.stringify,structuredClone), which are designed to transport data across different execution contexts(like b/w web worker and the main thread).
+   functions are not just data, they are live code bundled with hidden lexical environment(closures).since a deepclone creates an entirely new object
+   in a new memory location, so its impossible to copy or clone original function's internal scope and variable bindings without risking massive memory leaks or security issues.
+2. Method Loss in Common Techniques: 
+   a. JSON.stringify() / JSON.parse(): The JSON specification only supports data types like strings,objects(js object literals not func,symbol etc.), arrays, numbers, booleans, and nulls. 
+      Functions are not part of the JSON spec and are silently stripped out or converted to null during the process.
+   b. structuredClone(): While more powerful than JSON (handling Maps, Sets, and circular references), 
+      it explicitly throws a DataCloneError if it encounters a function or method. This prevents "open execution contexts" from being cloned across different threads.
+Solution: use shallow-copy or _.cloneDeep
+
+--> Why 2nd then was required in code "fetch('https://jsonplaceholder.typicode.com/todos/1').then(response => response.json()).then(json => console.log(json))"
+    2nd then required because fetch doesn't return final data at once rather it use to be readable stream which are then fed to .json()
+    async method which will wait for all data to get downloaded and then it will process and return a promise.
+
+--> Web worker
+A Web Worker is a script intended for offloading heavy, CPU-intensive tasks. It is "dedicated" to the specific page or tab that created it.
+ Primary Purpose: Parallel processing for heavy computation (e.g., complex data parsing, image/video manipulation, or real-time physics in games).
+ Lifespan: Tightly coupled to the browser tab; if you close the tab, the Web Worker is terminated.
+ Network: It cannot intercept network requests; it only communicates with the main script via postMessage().
+
+-->Service worker
+A Service Worker is a specialized type of worker that acts as a network proxy between your browser and the internet. 
+It is a core requirement for Progressive Web Apps (PWAs).
+Primary Purpose: Managing offline capabilities, intercepting network requests for caching (Cache Storage API), and handling background tasks like push notifications and background sync.
+Lifespan: Independent of any specific tab. It can continue running in the background even if all related tabs are closed.
+Network: It has the unique ability to "listen" to fetch events globally across its registered scope, allowing it to serve cached content when the user is offline. 
+
+-->Why do we use createAsyncThunk in redux toolkit to call an api, can't this be done in simple reducer function.
+In Redux Toolkit, you cannot perform API calls inside a simple reducer function because reducers must be pure functions, createAsyncThunk is used instead to manage the asynchronous nature and side effects of network requests.
+ Purity Requirement: Reducers must be "pure," meaning they only calculate the next state based on the current state and an action. 
+                     They are strictly prohibited from performing side effects like AJAX calls, timeouts, or promises.
+ Synchronous Execution: Reducers run synchronously. An API call takes time to complete; 
+                        a reducer cannot "wait" for a response without blocking the entire application's state management.
+ Predictability: Redux relies on predictable state updates for features like time-travel debugging. 
+                 Side effects in a reducer would cause unexpected behavior during these processes.
+
+ Calling an API in a reducer will not freeze the entire UI (in terms of locking the screen so you can't click anything), 
+ but it will "break" the UI's state logic and potentially cause severe performance lag.
