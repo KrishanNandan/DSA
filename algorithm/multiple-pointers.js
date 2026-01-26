@@ -1,6 +1,7 @@
 /**Multiple pointer pattern is used on sorted array, it is used to reduce code complexity  */
 /**In this pattern we evaluate 2 or more elements of array once, it could be 1st and last or 1st and 2nd and we
  * keep on moving to middle or end of array */
+
 /**Below problem: Write a function which accepts a sorted array of integer and returns first pair
  * of values whose sum is zero if none find then returns undefined
  */
