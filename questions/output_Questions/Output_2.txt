@@ -1,0 +1,78 @@
+21. What's the value of sum?
+    const sum = eval('10*10+5');=>>> 105
+eval evaluates code that's passed as a string. If it's an expression, like in this case, 
+it evaluates the expression. The expression is 10 * 10 + 5. This returns the number 105.
+
+24. What's the output?
+const obj = { 1: 'a', 2: 'b', 3: 'c' };
+const set = new Set([1, 2, 3, 4, 5]);
+obj.hasOwnProperty('1');==>true
+obj.hasOwnProperty(1);==>true
+set.has('1');==>false
+set.has(1);==>true
+All object keys (excluding Symbols) are strings under the hood, even if you don't type it yourself as a string. 
+This is why obj.hasOwnProperty('1') also returns true.
+It doesn't work that way for a set. There is no '1' in our set: set.has('1') returns false. 
+It has the numeric type 1, set.has(1) returns true.
+
+26. The JavaScript global execution context creates two things for you: the global object, and the "this" keyword. in the browser 
+it creates window object.
+Note: when we open the browser tab at that time itself window object get's created but it gets destroyed when we load another url
+blank url is also considered as "" url so when it moves to another url it destroy old one
+
+27. What's the output?
+for (let i = 1; i < 5; i++) {
+  if (i === 3) continue;
+  console.log(i); // logs 1 2 4
+}
+Note: The continue statement skips an iteration if a certain condition returns true.
+
+
+28. What's the output?
+String.prototype.giveLydiaPizza = () => {
+  return 'Just give Lydia pizza already!';
+};
+const name = 'Lydia';
+console.log(name.giveLydiaPizza())// will log "Just give Lydia pizza already!"
+String is a built-in constructor, that we can use to add properties to its prototype.
+
+33. What's the output?
+const person = { name: 'Lydia' };
+function sayHi(age) {
+  return `${this.name} is ${age}`;
+}
+console.log(sayHi.call(person, 21)); "Lydia is 21"
+console.log(sayHi.bind(person, 21)); function
+.bind. returns a copy of the function, but with a bound context! It is not executed immediately.
+in place of bind if it would have apply then we would have got error "CreateListFromArrayLike called on non-object"
+
+34. 8 unique falsy value in JavaScript?
+false,0,-0,0n,An-empty-string,null,undefined,NaN
+
+38. What's the output?
+(() => {
+  let x, y;
+  try {
+    throw new Error();
+  } catch (x) {
+    (x = 1), (y = 2);
+    console.log(x);//1
+  }
+  console.log(x);//undefined
+  console.log(y);//2 /**Because x initialize to 1 was a local variable coming from catch and y initialize was global one.
+})();
+ 
+Note: Boxing or wrapping of primitive type happens for all primitive type except "null" and "undefined"
+
+49. What's the value of num?
+const num = parseInt('7*6', 10); // 7 
+Only the first number in the string is returned. Based on the radix (the second argument in order to specify what type of number we want to parse it to: base 10, hexadecimal, octal, binary, etc.), 
+the parseInt checks whether the characters in the string are valid. 
+Once it encounters a character that isn't a valid number in the radix, it stops parsing and ignores the following characters.
+* is not a valid number. It only parses "7" into the decimal 7. num now holds the value of 7.
+
+
+
+
+
+
