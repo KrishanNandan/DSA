@@ -71,8 +71,140 @@ the parseInt checks whether the characters in the string are valid.
 Once it encounters a character that isn't a valid number in the radix, it stops parsing and ignores the following characters.
 * is not a valid number. It only parses "7" into the decimal 7. num now holds the value of 7.
 
+53. What's the output of below code?
+function Car() {
+  this.make = 'Lamborghini';
+  return { make: 'Maserati' };
+}
+const myCar = new Car();
+console.log(myCar.make); // Will log "Maserati"
+When a constructor function is called with the new keyword, it creates an object and sets the this keyword to refer to that object. By default, 
+if the constructor function doesn't explicitly return anything, it will return the newly created object.but in this scenario it is 
+returning so bydefault it will override default behaviour.
+
+57. What's the output?
+// counter.js
+let counter = 10;
+export default counter;
+// index.js
+import myCounter from './counter';
+myCounter += 1;
+console.log(myCounter);// will throw error
+An imported module is read-only: you cannot modify the imported module. Only the module that exports them can change its value.
+
+58. What's the output?(its in strict mode)
+const name = 'Lydia';
+age = 21;
+console.log(delete name);//false 
+console.log(delete age);//true, 
+since delete returns true if sucessful deletion and age on global object hence true, variable with const, let and var
+can't be deleted hence false.
+
+61. What's the output?
+const person = { name: 'Lydia' };
+Object.defineProperty(person, 'age', { value: 21 });
+console.log(person);//{ name: "Lydia", age: 21 }
+console.log(Object.keys(person));//["name"]
+With the defineProperty method, we can add new properties to an object, or modify existing ones. 
+When we add a property to an object using the defineProperty method, they are by default not enumerable. 
+The Object.keys method returns all enumerable property names from an object, in this case only "name".
+
+62. What's the output?
+const settings = {
+  username: 'lydiahallie',
+  level: 19,
+  health: 90,
+};
+const data = JSON.stringify(settings, ['level', 'health']);
+console.log(data);//"{"level":19, "health":90}"
+syntax: JSON.stringify(value, replacer, space)(replacer decides which value get's selected, it could be a method or array, here level and health hence only those got outputted)
+space:space (Optional): A string or number used to insert whitespace (indentation and line breaks) for readability. 
+If it is a number, it specifies how many spaces to use for indentation (up to 10). 
+If it is a string, that string is used as the indentation (up to 10 characters)
+
+Important Notes
+Non-serializable values: undefined, Function, and Symbol values are either omitted (in objects) or converted to null (in arrays) during stringification.
+Circular References: Passing an object with circular references (e.g., an object that refers to itself) will throw a TypeError.
+BigInt: Attempting to stringify a BigInt value will also throw a TypeError.
+toJSON() Method: If the object being stringified has a toJSON() method, JSON.stringify() will use the result of that method instead of the object itself.
+
+example function replacer
+const user = { id: 101, name: "Alice", email: "alice@example.com" };
+// Hide the email and change the ID format
+function customReplacer(key, value) {
+  if (key === "email") {
+    return undefined; // Removes this key from the result
+  }
+  if (key === "id") {
+    return `USER-${value}`; // Transforms the value
+  }
+  return value; // Returns other values as-is
+}
+console.log(JSON.stringify(user, customReplacer));
+// Output: '{"id":"USER-101","name":"Alice"}'
+
+example-toJSON
+const user = {
+  firstName: "John",
+  lastName: "Doe",
+  password: "secret_password",
+  
+  // Custom serialization logic
+  toJSON() {
+    return {
+      fullName: `${this.firstName} ${this.lastName}`,
+      // password is excluded because it's not in this returned object
+    };
+  }
+};
+
+console.log(JSON.stringify(user));
+// Output: '{"fullName":"John Doe"}'
 
 
+63. What's the output?
+let num = 10;
+const increaseNumber = () => num++;
+const increasePassedNumber = number => number++;
+const num1 = increaseNumber();
+const num2 = increasePassedNumber(num1);
+console.log(num1);//10
+console.log(num2);//10 since first return then increment happening
 
+64. What's the output?
+const value = { number: 10 };
+const multiply = (x = { ...value }) => { //each time new object is getting created
+  console.log((x.number *= 2)); 
+};
+multiply(); since new object so its more like passing by value hence 20
+multiply(); since new object so its more like passing by value hence 20
+multiply(value); passing by reference since no default parameter 20
+multiply(value); passing by reference since no default parameter 40
 
+65. What's the output?
+[1, 2, 3, 4].reduce((x, y) => console.log(x, y)); // (1 2) and (undefined 3) and (undefined 4)
+since initial value is not given hence it will take initial value as first element as accumulator for first pass hence
+1,2 gets logged, 2nd pass- since nothing returned hence accumulator becomes undefined and next value i.e 3 gets logged for y(current Vlue)
+for 3rd pass (undefined 4 is logged same reason as 2nd pass)
 
+67. What's the output?
+// index.js
+console.log('running index.js');
+import { sum } from './sum.js';
+console.log(sum(1, 2));
+// sum.js
+console.log('running sum.js');
+export const sum = (a, b) => a + b;
+
+will log "B: running sum.js, running index.js, 3", With the import keyword, all imported modules are pre-parsed.
+This means that the imported modules get run first, and the code in the file that imports the module gets executed after.
+
+69. What's the output?
+console.log(Number(2) === Number(2)); true
+console.log(Boolean(false) === Boolean(false)); true
+console.log(Symbol('foo') === Symbol('foo')); false, since every Symbol is unique
+
+69. What's the output?
+const name = 'Lydia Hallie';
+console.log(name.padStart(13));" Lydia Hallie" (1 whitespace at begining to make characters 13 and string originally is 12)
+console.log(name.padStart(2));"Lydia Hallie" since number of character is already more than 2 so no addition required.

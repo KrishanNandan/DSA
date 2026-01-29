@@ -1,0 +1,22 @@
+72. What's the output?
+console.log(String.raw`Hello\nworld`);//C: Hello\nworld
+String.raw returns a string where the escapes (\n, \v, \t etc.) are ignored!
+
+73. What's the output?
+async function getData() {
+  return await Promise.resolve('I made it!');
+}
+const data = getData();
+console.log(data);Promise {<pending>}
+
+74. What's the output?
+function addToList(item, list) {
+  return list.push(item);
+}
+const result = addToList('apple', ['banana']);
+console.log(result);//will return "2" since push returns the length of the array
+
+
+74. What's the output?
+const { firstName: myName } = { firstName: 'Lydia' };
+console.log(firstName);//will throw error
