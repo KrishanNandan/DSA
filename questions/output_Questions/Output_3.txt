@@ -17,6 +17,42 @@ const result = addToList('apple', ['banana']);
 console.log(result);//will return "2" since push returns the length of the array
 
 
-74. What's the output?
+75. What's the output?
 const { firstName: myName } = { firstName: 'Lydia' };
 console.log(firstName);//will throw error
+
+87. console.log('I want pizza'[0]); // logs "I"
+
+88. What's the output?
+function sum(num1, num2 = num1) {
+  console.log(num1 + num2);
+}
+sum(10);//Will log 20
+You can set a default parameter's value equal to another parameter of the function, 
+as long as they've been defined before the default parameter. We pass the value 10 to the sum function. 
+If the sum function only receives 1 argument, it means that the value for num2 is not passed, and the value of num1 is equal to the passed value 10 in this case. 
+The default value of num2 is the value of num1, which is 10. num1 + num2 returns 20.
+
+89. What's the output?
+// module.js
+export default () => 'Hello world';
+export const name = 'Lydia';
+// index.js
+import * as data from './module';
+console.log(data);//Will log "{ default: function default(), name: "Lydia" }"
+With the import * as name syntax, we import all exports from the module.js file into the index.js file as a new object called data is created
+
+
+function giveLydiaPizza() {
+  return 'Here is pizza!';
+}
+const giveLydiaChocolate = () => "Here's chocolate... now go hit the gym already.";
+console.log(giveLydiaPizza.prototype);//{} will give prototype as  object
+console.log(giveLydiaChocolate.prototype);undefined 
+Regular functions, such as the giveLydiaPizza function, have a prototype property, 
+which is an object (prototype object) with a constructor property. Arrow functions however, 
+such as the giveLydiaChocolate function, do not have this prototype property. 
+undefined gets returned when trying to access the prototype property using giveLydiaChocolate.prototype.
+arrow functions do not have a prototype property because they were specifically designed to be non-constructible.
+In JavaScript, a function can only be used with the new keyword if it has an internal method called [[Construct]] but arrow function
+doesn't have this they only have [[call]] and regular have both.
