@@ -43,6 +43,7 @@ console.log(data);//Will log "{ default: function default(), name: "Lydia" }"
 With the import * as name syntax, we import all exports from the module.js file into the index.js file as a new object called data is created
 
 
+90. What's the output?
 function giveLydiaPizza() {
   return 'Here is pizza!';
 }
@@ -56,3 +57,139 @@ undefined gets returned when trying to access the prototype property using giveL
 arrow functions do not have a prototype property because they were specifically designed to be non-constructible.
 In JavaScript, a function can only be used with the new keyword if it has an internal method called [[Construct]] but arrow function
 doesn't have this they only have [[call]] and regular have both.
+
+
+94. What's the output?
+function getItems(fruitList, ...args, favoriteFruit) {
+  return [...fruitList, ...args, favoriteFruit]
+}
+getItems(["banana", "apple"], "pear", "orange"); //Will throw syntax error
+...args is a rest parameter. The rest parameter's value is an array containing all remaining arguments, 
+and can only be the last parameter! In this example, the rest parameter was the second parameter. 
+This is not possible, and will throw a syntax error.
+
+
+95. What's the output?
+function nums(a, b) {
+  if (a > b) console.log('a is bigger');
+  else console.log('b is bigger');
+  return
+  a + b;
+}
+console.log(nums(4, 2)); will log "a is bigger, undefined"
+console.log(nums(1, 2)); will log "b is bigger, undefined"
+In JavaScript, we don't have to write the semicolon (;) explicitly, however the JavaScript engine still adds them after statements. 
+This is called Automatic Semicolon Insertion. A statement can for example be variables, or keywords like throw, return, break, etc.
+Here, we wrote a return statement, and another value a + b on a new line. However, since it's a new line, 
+the engine doesn't know that it's actually the value that we wanted to return. Instead, it automatically added a semicolon after return.
+This means that a + b is never reached, since a function stops running after the return keyword. 
+If no value gets returned, like here, the function returns undefined. Note that there is no automatic insertion after if/else statements!
+
+96. What's the output?
+class Person {
+  constructor() {
+    this.name = 'Lydia';
+  }
+}
+Person = class AnotherPerson {
+  constructor() {
+    this.name = 'Sarah';
+  }
+};
+const member = new Person();
+console.log(member.name); will log 'Sarah'
+We can set classes equal to other classes/function constructors. In this case, we set Person equal to AnotherPerson. 
+The name on this constructor is Sarah, so the name property on the new Person instance member is "Sarah".
+Note: except arrow function anonymous and function made from Function constructor can also be constructor function.
+
+Hoisted Declarations and Their Behaviors
+Type of Declaration 	Hoisted?	Initialization	Result if Accessed Early
+var                  	Yes	           undefined	Returns undefined
+Function Declaration	Yes	   Full function body	Works perfectly
+let & const	          Yes	  None (Uninitialized)	ReferenceError (due to TDZ)
+Class Declaration	    Yes  	None (Uninitialized)	ReferenceError
+Static import	        Yes	    Fully loaded       	Works perfectly
+To test have a variable in a function with let and const and have one variable in global scope but still we get error 
+ReferenceError: Cannot access 'krishan' before initialization, if it was not hoisted then it would have used global variable.
+
+97. What's the output?
+const info = {
+  [Symbol('a')]: 'b',
+};
+console.log(info); // logs "{Symbol('a'): 'b'}"
+console.log(Object.keys(info));//logs "[]" since symbol is non-enumerable
+
+99. What's the output?
+const name = 'Lydia';
+console.log(name());//TypeError
+
+101. What's the output?
+function compareMembers(person1, person2 = person) {
+  if (person1 !== person2) {
+    console.log('Not the same!');
+  } else {
+    console.log('They are the same!');
+  }
+}
+const person = { name: 'Lydia' };
+compareMembers(person);//They are the same!
+//Default parameter values are not evaluated when the function is defined; they are evaluated at call time. 
+The engine parses the function signature but doesn't try to look up what person is until you actually execute compareMembers().
+
+110. What does this method do?
+JSON.parse();
+With the JSON.parse() method, we can parse JSON string to a JavaScript value. i.e primitive value and object both in the string form to actual form.
+can't parse "JSON.parse('abc')"==> will throw invalid json error.
+
+112. What's the output?
+function* generatorTwo() {
+  yield* ['a', 'b', 'c'];
+}
+const two = generatorTwo();
+console.log(two.next().value);//will log "a"
+With the yield* keyword, we can yield values from another generator function, or iterable object (for example an array).
+
+114. What will happen?
+let config = {
+  alert: setInterval(() => {
+    console.log('Alert!');
+  }, 1000),
+};
+config = null;
+//The setInterval callback will still be called every second, even though we didn't explicitly invoke it, because implicity it
+got invoked, i.e. In JavaScript, when you define an object literal, the code on the right side of the colon (:) is evaluated immediately to determine what value should be assigned to the property.
+main reason for evalution was parenthesis setInterval(x,1000),"()" is responsible here.
+
+
+126. What's the output?
+function getFine(speed, amount) {
+  const formattedSpeed = new Intl.NumberFormat('en-US', {
+    style: 'unit',
+    unit: 'mile-per-hour'
+  }).format(speed);
+
+  const formattedAmount = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(amount);
+
+  return `The driver drove ${formattedSpeed} and has to pay ${formattedAmount}`;
+}
+
+console.log(getFine(130, 300)) //The driver drove 130 mph and has to pay $300.00
+
+
+128. What's the output?
+const name = 'Lydia Hallie';
+const age = 21;
+console.log(Number.isNaN(name));//false
+console.log(Number.isNaN(age));//false
+console.log(isNaN(name));//true
+console.log(isNaN(age));//true
+With the Number.isNaN method, you can check if the value you pass is a numeric value and equal to NaN. 
+name is not a numeric value, so Number.isNaN(name) returns false. 
+age is a numeric value, but is not equal to NaN, so Number.isNaN(age) returns false.
+With the isNaN method, you can check if the value you pass is not a number. 
+name is not a number, so isNaN(name) returns true. age is a number, so isNaN(age) returns false.
+
+
