@@ -12,4 +12,4 @@ function binarySearch(sortedArray, value) {
         }
     }
 }
-console.log(arr(k, 6));
+console.log(binarySearch(arr, 6));
