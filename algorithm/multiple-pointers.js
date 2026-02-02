@@ -178,69 +178,34 @@
 
 // Three Sum: Given an array nums of n integers, return all unique triplets [a, b, c] in the array such that a + b + c = 0.
 function threeSum(nums) {
-    const result = []; // This array will store all the unique triplets
-
-    // Step 1: Sort the array.
-    // Sorting is crucial for two reasons:
-    // 1. It allows us to easily skip duplicate elements.
-    // 2. It enables the efficient two-pointer approach.
     nums.sort((a, b) => a - b);
+    const result = [];
 
-    // Step 2: Iterate through the array with the first pointer 'i'.
-    // We iterate up to nums.length - 2 because we need at least two more elements
-    // (left and right) to form a triplet.
     for (let i = 0; i < nums.length - 2; i++) {
-        // Skip duplicate values for 'i'.
-        // If the current element is the same as the previous one,
-        // it will produce the same triplets, so we skip it to avoid duplicates in the result.
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            continue;
-        }
+        // Optimization: If current number > 0, sum can't be 0 (since array is sorted)
+        if (nums[i] > 0) break; 
+        if (i > 0 && nums[i] === nums[i - 1]) continue;  // skiping duplicate values
 
-        // Calculate the target sum for the remaining two numbers.
-        // If nums[i] + nums[left] + nums[right] = 0, then nums[left] + nums[right] must be -nums[i].
-        const target = -nums[i];
-        let left = i + 1; // Initialize the left pointer
-        let right = nums.length - 1; // Initialize the right pointer
+        let left = i + 1, right = nums.length - 1;
 
-        // Step 3: Use the two-pointer approach to find the remaining two numbers.
-        // The loop continues as long as the left pointer is less than the right pointer.
         while (left < right) {
-            const currentSum = nums[left] + nums[right];
-
-            if (currentSum === target) {
-                // Found a triplet! Add it to the result array.
+            const sum = nums[i] + nums[left] + nums[right];
+            
+            if (sum === 0) {
                 result.push([nums[i], nums[left], nums[right]]);
-
-                // Move both pointers inwards.
-                left++;
-                right--;
-
-                // Skip duplicate values for 'left' pointer.
-                // If the new left element is the same as the one just used, skip it.
-                while (left < right && nums[left] === nums[left - 1]) {
-                    left++;
-                }
-
-                // Skip duplicate values for 'right' pointer.
-                // If the new right element is the same as the one just used, skip it.
-                while (left < right && nums[right] === nums[right + 1]) {
-                    right--;
-                }
-            } else if (currentSum < target) {
-                // If the current sum is less than the target, we need a larger sum.
-                // Move the left pointer to the right to increase the sum.
+                // Skip duplicates for both pointers
+                while (nums[left] === nums[++left]); 
+                while (nums[right] === nums[--right]);
+            } else if (sum < 0) {
                 left++;
             } else {
-                // If the current sum is greater than the target, we need a smaller sum.
-                // Move the right pointer to the left to decrease the sum.
                 right--;
             }
         }
     }
-
-    return result; // Return the array of unique triplets
+    return result;
 }
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));
 
 //	Example: Given nums = [-1, 0, 1, 2, -1, -4], a solution set is [[-1, 0, 1], [-1, -1, 2]]. 
 
