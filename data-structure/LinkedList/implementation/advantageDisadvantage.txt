@@ -1,0 +1,8 @@
+Advantages: Dynamic size and efficient insertion/deletion (especially at the ends or if the previous node is known).
+Disadvantages: No random access (requiring traversal), higher memory use for pointers, and poorer cache performance.
+real-world applications? 
+1. They are used in implementations of stacks and queues, 
+2. music playlists, 
+3. browser history, 
+4. undo/redo functionality, 
+5. graph representations 

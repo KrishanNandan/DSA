@@ -20,7 +20,7 @@ class DoublyLinkedList {
       this.tail = this.head;
     } else {
       this.tail.next = newNode;
-      newNode.prev = this.tail;
+      newNode.prev = this.tail;/**This tells the newly created node to look back at the current end of the list. This is the correct way to "link" the new node into the chain */
       this.tail = newNode;
     }
     this.length++;

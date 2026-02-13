@@ -15,8 +15,8 @@ class singlyLinkList {
   push(val) {
     const newNode = new Node(val);
     if (this.head) {
-      this.tail.next = newNode; /**Here we are linking the new node to the list */
-      this.tail = newNode; /**Here Updating the 'tail' pointer itself */
+      this.tail.next = newNode; /**Here we are linking the new node to the list i.e to last next of head*/
+      this.tail = newNode; /**since same node so it will make tail point to last node of head i.e last next*/
     }
     else {
       this.head = newNode;
