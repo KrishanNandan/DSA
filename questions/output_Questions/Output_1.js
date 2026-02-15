@@ -109,8 +109,8 @@ const b1 = {
 let b = new Number(3);
 let c = 3;
 
-console.log(a == b);
-console.log(a === b);
+console.log(a == b);// during this operation type coercion happens since js see one as primitive other object so call ValueOf on b
+console.log(a === b);// during strict check type coercion doesn't happens
 console.log(b === c);
 true false false(Since == equals checks only values hence it passed but === checks type as well and b is an object)
 */
@@ -155,12 +155,38 @@ If you want a method to be available to all object instances, you have to add it
 ] };
 */
 
+//Note:**** Inside arrow function this can only be inherited from parents of this i.e of global scope, even call, bind etc get ignored
+// also arrow function written inside an object will have this as undefined, even after getting called by that object itself
+
+// 'use strict';
+// const team = {
+//     a: 10,
+//     c:()=>{
+//         console.log(this); will give window in browser and blank object in node
+//     }
+// }
+
+// team.c.call(team);
+
+// 'use strict';
+// const player = {
+//     name: "Skywalker",
+//     start: function() {
+//         const arrowBtn = () => {
+//             console.log("Hello, " + this.name); here this will point to player object since its parent is pointing to that
+//         };
+//         arrowBtn();
+//     }
+// };
+// player.start();
+
+
 function Person(firstName, lastName) {
   this.firstName = firstName;
   this.lastName = lastName;
 }
 const lydia = new Person('Lydia', 'Hallie');
-const sarah = Person('Sarah', 'Smith');
+const sarah = Person('Sarah', 'Smith');// 190 or 191 not run since failure will happen here itself if strict mode else undefined for 191
 console.log(lydia);
 console.log(sarah);
 /**For sarah, we didn't use the new keyword. When using new, this refers to the new empty object we create. 
