@@ -1,0 +1,10 @@
+1.) Handling Shared Resources (Scheduling): whenever you need to manage tasks or data in the exact order they arrive. 
+    It ensures fairness—the first request to arrive is the first one served.
+
+2.) Data Buffering : When data is being generated faster than it can be processed, a queue acts as a "buffer" to prevent data loss.
+
+3.) Messaging and Notifications : Queues are the backbone of how apps communicate with each other. 
+    Messaging Apps: If you send a message while your friend is offline, the server holds that message in a queue and delivers it as soon as they reconnect.
+
+4.) Breadth-First Search (BFS) : In computer science algorithms, queues are essential for "Level-Order" traversal.
+ 

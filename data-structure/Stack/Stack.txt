@@ -1,0 +1,10 @@
+1.) The "Undo" Mechanism : Almost every software (Word, Photoshop, Code Editors) uses a stack to track your changes and let's say 
+    if you want to go back then you can use this to undo the changes.
+
+2.) Browser History: Our web browser uses a stack to manage the pages you visit. When we click a link, the new URL is pushed onto the stack.
+    When we hit the Back Button, the browser "pops" the current page off the stack and shows us the page that was directly underneath it.
+
+3.) Expression Evaluation (Math) : Compilers use stacks to solve mathematical equations and check for syntax errors.
+    Parentheses Matching: A stack is used to ensure every ( has a matching ). When the compiler sees (, it pushes it; when it sees ), 
+    it pops the stack. If the stack is empty at the end, the code is balanced.
+    Postfix/Prefix notation: Stacks help computers solve complex math like (3 + 4) * 5 by converting them into a format the CPU can process easily.
