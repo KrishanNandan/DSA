@@ -20,18 +20,18 @@ class BinarySearchTree {
             this.root = newNode;
         } else {
             // Otherwise, find the correct position for the new node
-            this.insertNode(this.root, newNode);
+            this.#insertNode(this.root, newNode);
         }
     }
     // Helper method to insert a new node
-    insertNode(node, newNode) {
+    #insertNode(node, newNode) {
         // If the new node's data is less than the current node's data, go left
         if (newNode.data < node.data) {
             if (node.left === null) {
                 node.left = newNode;
             } else {
-                // If there is already a left child, recursively call insertNode
-                this.insertNode(node.left, newNode);
+                // If there is already a left child, recursively call the private helper
+                this.#insertNode(node.left, newNode);
             }
         }
         // If the new node's data is greater than the current node's data, go right
@@ -39,8 +39,8 @@ class BinarySearchTree {
             if (node.right === null) {
                 node.right = newNode;
             } else {
-                // If there is already a right child, recursively call insertNode
-                this.insertNode(node.right, newNode);
+                // If there is already a right child, recursively call the private helper
+                this.#insertNode(node.right, newNode);
             }
         }
     }
