@@ -107,3 +107,19 @@ In Redux Toolkit, you cannot perform API calls inside a simple reducer function 
 
  Calling an API in a reducer will not freeze the entire UI (in terms of locking the screen so you can't click anything), 
  but it will "break" the UI's state logic and potentially cause severe performance lag.
+
+
+--> What is the use of {} inside react jsx or in js function?
+    This works as delimiters i.e. it tells that things inside this is js logic so evaluate it. 
+
+--> Why backgroundColor not applied to below code
+    const Wrapper = ({ children }) => {
+    let html = <h1>Hello My name is Krishan Nandan Sharma</h1>;
+    return <Fragment>
+     <div style={{ backgroundColor: 'red' }}>
+     {createPortal(html, document.getElementById('krishan'))}
+       {children}
+     </div>
+    </Fragment>
+   }
+   The backgroundColor is not applying because Portals render content outside of the current DOM hierarchy.
