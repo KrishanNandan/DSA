@@ -123,3 +123,15 @@ In Redux Toolkit, you cannot perform API calls inside a simple reducer function 
     </Fragment>
    }
    The backgroundColor is not applying because Portals render content outside of the current DOM hierarchy.
+
+--> Object.is() -> used for referential equality
+const obj1 = { name: "React" };
+const obj2 = { name: "React" };
+const obj3 = obj1;
+
+console.log(Object.is(obj1, obj2)); // false (different memory addresses)
+console.log(Object.is(obj1, obj3)); // true  (same memory address)
+
+--> React uses Object.is() so Ui won't update but data will be
+const [items, setItems] = useState<readonly string[]>(['Apple']);
+items.push('Orange'); // TypeScript Error: Property 'push' does not exist on type 'readonly string[]'.
