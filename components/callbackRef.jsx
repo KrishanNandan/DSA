@@ -19,7 +19,7 @@ function SearchBar() {
   );
 }
 
-/**Value of node will be element during mount and at the time of unMount it will be null, think of scen*/
+/**Value of node will be element during mount and at the time of unMount it will be null*/
 
 /**
  * use case:
