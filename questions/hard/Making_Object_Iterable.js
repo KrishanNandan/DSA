@@ -24,6 +24,13 @@ myObj[Symbol.iterator] = function* () {
     }
 };
 
+/**If you want result like 1st option*/
+myObj[Symbol.iterator] = function* () {
+    for (let key of Object.keys(this)) {
+      yield this[key]; // 'yield' returns the value and PAUSES here until the next loop
+    }
+};
+
 /** Baiscally for of loop, spread operator runs next function for every loop and sees for done value if its true then it stops*/
 /**This is called iterator pattern in general whose purpose is to return value of a collection but with abstraction
  * In js it is hardcoded requirement to implement iterator protocol for for of loop etc.

@@ -13,8 +13,21 @@ function flattenObject(obj, prefix = '', res = {}) {
     }
     return res;
 }
-
 console.log(flattenObject({ a: 1, b: 2, c: { ab: 1, bc: 2 } }));
+
+/** Simplified version */
+function flattenObject(obj, prefix = '', res = {}) {
+for (const [key, value] of Object.entries(obj)) {
+    const propName = prefix ? `${prefix}.${key}` : key;
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+        flattenObject(value, propName, res);
+    } else {
+        res[propName] = value;
+    }
+}
+    return res;
+}
+
 
 //**Flatten the array */
 function flattenArray(arr = []) {

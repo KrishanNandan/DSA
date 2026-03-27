@@ -20,3 +20,8 @@ const throttle = (func, delayMillSec) => {
 }
 
 
+//Feature    	      Debouncing                	                                      Throttling
+//Main Goal	     Execute after the "noise" stops.	                                Execute at a steady, fixed rate.
+//Execution	     Only once (at the end).	                                        Multiple times (spread out).
+//Wait Time	     Resets with every trigger.	                                      Constant regardless of triggers.
+//Best Used      For	Typing, form validation, resizing.	                        Scrolling, mouse movement, button mashing.

@@ -21,7 +21,7 @@ function integerSquareRoot(n) {
 
 /**Newton's Method */
 /**
- * guess = (guess+(x/guess))2
+ * guess = (guess+(number/guess))2
  */
 function calculateSquareRoot(number) {
     if (number < 0) return NaN; // Square root of negative is not a real number

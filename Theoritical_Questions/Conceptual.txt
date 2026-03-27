@@ -133,3 +133,17 @@ console.log(Object.is(obj1, obj3)); // true  (same memory address)
     this state is changed or not and in this case it isn't so it will not update it.
 const [items, setItems] = useState<readonly string[]>(['Apple']);
 items.push('Orange'); // TypeScript Error: Property 'push' does not exist on type 'readonly string[]'.
+
+
+-->In JavaScript, enumerable is a "flag" (an internal attribute) attached to every property of an object. 
+It determines whether that property will show up when you "count through" or iterate over the object using common loops and methods.
+const user = { name: 'Alice' };
+// Check flags
+console.log(Object.getOwnPropertyDescriptor(user, 'name').enumerable); // true
+// Create a hidden property
+Object.defineProperty(user, 'id', {
+  value: 123,
+  enumerable: false
+});
+console.log(user.id); // 123 (Still accessible)
+console.log(Object.keys(user)); // ["name"] ('id' is hidden)
