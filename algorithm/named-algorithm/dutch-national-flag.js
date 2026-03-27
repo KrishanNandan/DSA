@@ -4,8 +4,8 @@ function sortMixedArray(arr) {
         let val = arr[i];
         if (typeof val === 'number') {
             // Move to number section
-            [arr[i], arr[strEnd]] = [arr[strEnd], arr[i]];/**Here we are putting things at i place to strEnd place*/
-            [arr[strEnd], arr[numEnd]] = [arr[numEnd], arr[strEnd]];/**Here we are putting things at strEnd place to numEnd place*/
+            [arr[i], arr[strEnd]] = [arr[strEnd], arr[i]];/**Here we are putting things at i place to strEnd place(strEnd is pointing to element next to the last string element),so that in next step we can interchange 1st element of str with number which is sitting at current of strEnd*/
+            [arr[strEnd], arr[numEnd]] = [arr[numEnd], arr[strEnd]];/**Here we are putting things at strEnd place to numEnd place since numEnd was pointing to 1st element of string*/
             numEnd++;/**not directly at numEnd else number coming after a string would have replaced previous number since incase of num*/
             strEnd++;/**Both pointer moves 1 place but incase of string only string pointer, so if a num then a string then again a num */
         } else if (typeof val === 'string') { /**Would have replaced string at begining so we moved the pointer by 1*/
@@ -16,7 +16,7 @@ function sortMixedArray(arr) {
     }
     return arr;
 }
-
+/**This is also an example of in place substitution */
 // --- Testing ---
 const data = ["apple", true, 10, "banana", false, 5.5, true, "cherry", 100];
 console.log("Sorted Array:", sortMixedArray(data));

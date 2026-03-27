@@ -10,13 +10,9 @@ Flexibility to use for different devices
 Corss-Platform library
 Maintainablity
 
-
--->is array mutable in javascript and typescript
-array is mutable in javascript but not in typescript
-
 -->difference between arrow and normal function
  No arguments object in arrow functions
- Arrow functions do not create their own this binding
+ Arrow functions do not have this 
  Arrow functions cannot be used as constructors
  Arrow functions cannot be declared
  Arrow functions cannot be accessed before initialization
@@ -25,7 +21,7 @@ array is mutable in javascript but not in typescript
 -->advantage of using NextJs over ReactJs
 The major difference between Next JS and React JS is performance because of 
 1. the static destinations , server-side rendering, Image optimization,code-splitting etc
-2. Waterfalling in react
+2. Waterfalling(sequential flow of data due to await) in react(it is also in nextJs and can be avoided using promise.all,streaming with suspense)
 3. Better SEO
 4. React won't work where javascript does't work like emails eg. from make my trip 
 
@@ -33,6 +29,7 @@ The major difference between Next JS and React JS is performance because of
 
 -->What is a closure?
 A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).
+lexical environment use to have environment record and outer environment record.
 
 
 
@@ -132,6 +129,7 @@ const obj3 = obj1;
 console.log(Object.is(obj1, obj2)); // false (different memory addresses)
 console.log(Object.is(obj1, obj3)); // true  (same memory address)
 
---> React uses Object.is() so Ui won't update but data will be
+--> If we change the value of items directly then Ui won't update but data will be changed since React uses Object.is() and checks if the refrence for
+    this state is changed or not and in this case it isn't so it will not update it.
 const [items, setItems] = useState<readonly string[]>(['Apple']);
 items.push('Orange'); // TypeScript Error: Property 'push' does not exist on type 'readonly string[]'.

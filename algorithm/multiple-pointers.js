@@ -157,21 +157,18 @@
 
 //         or
 
-// function moveZerosToEndRefactored(arr) {
-//     let nonZeroIndex = 0; // Pointer to place the next non-zero element
-//     // First pass: Move all non-zero elements to the beginning
-//     for (let i = 0; i < arr.length; i++) {
-//         if (arr[i] !== 0) {
-//             arr[nonZeroIndex] = arr[i];
-//             nonZeroIndex++;
+// using dutch national flag algorithm
+// function moveZerosToEnd(arr) { 
+//     let nonZeroEnd = 0 ;
+//     for(let i=0; i<arr.length; i++){
+//         if(arr[i]!==0){
+//             [arr[nonZeroEnd],arr[i]] = [arr[i],arr[nonZeroEnd]];
+//             nonZeroEnd++;
 //         }
-//     }
-//     // Second pass: Fill the remaining positions with zeros
-//     for (let i = nonZeroIndex; i < arr.length; i++) {
-//         arr[i] = 0;
 //     }
 //     return arr;
 // }
+//  console.log(moveZerosToEnd([0,1,0,3,12]));
 //	Example: moveZerosToEnd([0,1,0,3,12]) should return [1,3,12,0,0].
 
 
@@ -181,21 +178,22 @@ function threeSum(nums) {
     nums.sort((a, b) => a - b);
     const result = [];
 
-    for (let i = 0; i < nums.length - 2; i++) {
-        // Optimization: If current number > 0, sum can't be 0 (since array is sorted)
+    for (let i = 0; i < nums.length - 2; i++) {/** Here we are selecting 1 element which will be the first element*/
+        // Optimization: If first number > 0, sum can't be 0 (since array is sorted) since 2nd and 3rd will be larger than first element since array is sorted
         if (nums[i] > 0) break; 
         if (i > 0 && nums[i] === nums[i - 1]) continue;  // skiping duplicate values
 
-        let left = i + 1, right = nums.length - 1;
+        let left = i + 1, right = nums.length - 1; //here we have selected 2nd and 3rd element
 
-        while (left < right) {
+        while (left < right) { // here we are using multi pointer method to shuffle 2nd and 3rd element in the array and checking if they make sum 0 with 1st element
             const sum = nums[i] + nums[left] + nums[right];
             
             if (sum === 0) {
                 result.push([nums[i], nums[left], nums[right]]);
                 // Skip duplicates for both pointers
-                while (nums[left] === nums[++left]); 
-                while (nums[right] === nums[--right]);
+                while (nums[left] === nums[++left]); //here first we are incrementing left and checking if it is same as previous if yes then we are again incrementing and checking
+                while (nums[right] === nums[--right]);//Opposite of above logic
+                /**skipping is necessary here else we can get duplicate pair of zeros, but not incase of below 2 scenario since if less than or greater came then again they will move ahead*/
             } else if (sum < 0) {
                 left++;
             } else {
@@ -209,3 +207,27 @@ console.log(threeSum([-1, 0, 1, 2, -1, -4]));
 
 //	Example: Given nums = [-1, 0, 1, 2, -1, -4], a solution set is [[-1, 0, 1], [-1, -1, 2]]. 
 
+
+//Already sorted array
+function twoSumZero(arr) {
+  if (!Array.isArray(arr) || arr.length < 1) return undefined;
+  let left = 0;
+  let right = arr.length - 1;
+  let result = []
+  while (left < right) {
+    let sum = arr[left] + arr[right];
+    if (sum === 0) {
+      result.push([arr[left], arr[right]]);
+      while(arr[left]===arr[++left]);
+      while(arr[right]===arr[--right]);
+    } else {
+      if (sum > 0) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+  }
+  return result;
+}
+console.log(twoSumZero([-2, -1, 1, 2, 3, 4, 6]));
