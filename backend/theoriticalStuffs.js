@@ -28,7 +28,9 @@
  * Header: Info about encrypting algorithm and type of token
  * Payload: Also called claims(predefined claims-user Info,Public-defined at will by user,Private:To share info)
  * Signature: Optional, consist of encoded header, encoded payload and algorithm
- * 
+ * HS256- use openssl to generate key and use it as secret to generate jwt token and keep this in the AWS secret manager
+ * RS256- generate public key and private from this public key and use private for sign and public for verify
+ * IDP- Uses RS256(Asymmetric),backend calls IDP to which gives list of public keys(also called JWKS(json web key set)), we uses kid from jwt recived to filter public key recived and uses to verify(all donee by libs like aws-jwt-verify,jwks-rsa) 
  * 
  */
 
