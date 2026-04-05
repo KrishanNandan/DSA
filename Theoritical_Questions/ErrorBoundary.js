@@ -2,17 +2,24 @@ import React from 'react';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); /**Adds value of parent in this keyword, its more like we say hey parent put your setup in this and then we put child values if this is called prior to super code will crash*/
     this.state = { hasError: false };
   }
 
   // Updates state so the next render shows the fallback UI, it catches the error and updates the state
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error) {/**This executes as soon error occurs and then render gets executed and atlast componentDidCatch so all side effect related things or logging put here*/
     return { hasError: true };
   }
+// Because it's a static method, it belongs to the class itself, not the specific instance (this). React designed it this way to ensure you don't try to read this.state or call this.myMethod() while the component is in the middle of crashing.
+// It’s a "pure" function: Error goes in 
+//  State update comes out.
+
+
 
   // Used for side effects like logging the error to a service (e.g., Sentry)
-  componentDidCatch(error, info) {
+  componentDidCatch(error, info) { /**error: tells you why the code broke.
+info: tells you which part of your UI broke it(Stack trace).
+ */
     console.error("Error caught:", error, info);
   }
 

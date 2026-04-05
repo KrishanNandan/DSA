@@ -125,9 +125,14 @@ In Redux Toolkit, you cannot perform API calls inside a simple reducer function 
 const obj1 = { name: "React" };
 const obj2 = { name: "React" };
 const obj3 = obj1;
-
 console.log(Object.is(obj1, obj2)); // false (different memory addresses)
 console.log(Object.is(obj1, obj3)); // true  (same memory address)
+it's same as the === but fixes 2 issues of ===
+--> 0===-0 gives true, As per math its true but in physics -0 is seen as aproaching from left side, Object.is(0,-0), gives false
+--> NaN === NaN gives false Object.is(NaN, NaN) gives true
+
+
+
 
 --> If we change the value of items directly then Ui won't update but data will be changed since React uses Object.is() and checks if the refrence for
     this state is changed or not and in this case it isn't so it will not update it.
@@ -147,3 +152,66 @@ Object.defineProperty(user, 'id', {
 });
 console.log(user.id); // 123 (Still accessible)
 console.log(Object.keys(user)); // ["name"] ('id' is hidden)
+
+
+--> SessionStorage data presence
+Action 	                                                   sessionStorage Behavior
+Left-click link (target="_blank")	                     Copied to new tab (unless noopener is used)
+window.open()	                                         Copied to the new window/tab
+Duplicating a tab	                                     Copied exactly as it is
+Manual New Tab + URL	                                 Empty (fresh session)
+Right-click -> New Tab	                                 Empty (usually treated as manual)
+
+
+ImmerJs
+ImmerJS does not just append to the old state, nor does it blindly recreate everything. It uses a clever technique called Structural Sharing.
+## 1. The Core Concept: Copy-on-Write
+When you "mutate" the state in a Redux reducer using Immer (which is built into Redux Toolkit), Immer tracks exactly which parts of the object tree you touched.
+
+* Changed Parts: Immer creates a new object for the specific property you modified.
+* Unchanged Parts: Immer keeps the original reference (it pointers to the old memory location).
+
+## 2. Example: What happens in memory?
+Imagine you have a state object with a list of users and a theme setting:
+
+const state = {
+  users: [{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }],
+  theme: 'dark'
+};
+// You update Bob's name
+state.users[1].name = 'Robert';
+
+Here is what Immer does behind the scenes:
+
+   1. New Object: It creates a new object for Bob ({ id: 2, name: 'Robert' }).
+   2. New Array: It creates a new users array containing the original Alice and the new Robert.
+   3. New Root: It creates a new root state object.
+   4. REUSED Reference: It keeps the exact same reference for Alice. It does not copy her because she didn't change.
+
+## 3. Why This Matters for Redux
+Redux relies on Immutability. If you just "appended" or "mutated" the original object, React wouldn't know the state changed (because the memory address stayed the same), and your UI wouldn't re-render.
+
+| Action | Result with Immer |
+|---|---|
+| Reference to Changed Item | New (Tells React to update) |
+| Reference to Unchanged Item | Same (Saves memory & prevents unnecessary re-renders) |
+| The "Draft" State | A temporary Proxy that records your changes |
+
+## Summary
+Immer creates a new object tree that shares as much data as possible with the old one. It feels like you are mutating the old one, but it safely produces a brand-new version for Redux.
+Do you want to see how to verify these references using a simple console.log test in your code?
+
+
+
+ getOwnPropertyDescriptor
+ Object.getOwnPropertyDescriptor() method returns a descriptor object.
+ eg. const user = {
+    name:"suman"
+}
+console.log(Object.getOwnPropertyDescriptor(user, 'name')); will give below output, it is saying this property has this value,its writeable etc..., sort of giving description.
+{
+  value: 'suman',
+  writable: true,
+  enumerable: true,
+  configurable: true
+}
